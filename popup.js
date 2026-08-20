@@ -42,7 +42,8 @@ button.addEventListener("click", async () => {
   try {
     const results = await chrome.scripting.executeScript({
       target: { tabId: tab.id, allFrames: true },
-      func: detectPdfInCurrentFrame
+      func: detectPdfInCurrentFrame,
+      world: "MAIN"
     });
     const url = results.map((result) => result.result).find(Boolean);
 
