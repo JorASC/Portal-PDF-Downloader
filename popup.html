@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Descargar PDF</title>
+    <style>
+      body { font: 14px system-ui, sans-serif; margin: 16px; width: 250px; color: #202124; }
+      button { width: 100%; border: 0; border-radius: 7px; padding: 10px; background: #0b57d0; color: white; font-weight: 600; cursor: pointer; }
+      button:disabled { background: #9aa0a6; cursor: wait; }
+      #status { margin: 12px 0 0; line-height: 1.35; }
+    </style>
+  </head>
+  <body>
+    <button id="download">Download open PDF</button>
+    <p id="status">Open a document in the supported portal first.</p>
+    <script src="popup.js"></script>
+  </body>
+</html>
