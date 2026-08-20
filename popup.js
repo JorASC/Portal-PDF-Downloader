@@ -7,12 +7,14 @@ const detectPdfInCurrentFrame = () => {
   const endpointPattern = /ObtenerAgregadoPorPartida/i;
   const pdfFilePattern = /\.pdf$/i;
   const supportedHostname = "srppn.chihuahua.gob.mx";
+  const viewerPdfUrl = globalThis.PDFViewerApplication?.url;
   const candidates = [
     ...performance.getEntriesByType("resource").map((entry) => entry.name),
     ...[...document.querySelectorAll("embed[src], iframe[src], object[data]")]
       .map((element) => element.src || element.data)
-      .filter(Boolean)
-  ];
+      .filter(Boolean),
+    viewerPdfUrl
+  ].filter(Boolean);
 
   return candidates.reverse().find((value) => {
     try {
