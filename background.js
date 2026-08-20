@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
   chrome.downloads.download({
     url: message.url,
+    filename: "rpp-document.pdf",
     saveAs: true,
     conflictAction: "uniquify"
   }).then(() => sendResponse({ ok: true }))

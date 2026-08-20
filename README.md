@@ -19,7 +19,7 @@ It is designed for documents available through the user's own signed-in Chrome s
 Open PDF in SRPPN → extension detects its portal URL → Chrome download API → native Save As dialog
 ```
 
-When the user clicks the button, the extension checks the current tab and its frames for a compatible URL exposed by the page resource list, PDF viewer element, or PDF.js viewer state. The PDF.js check runs in the viewer's own page context so it can read the URL already loaded by the portal. This means it does not require reloading the portal page. Chrome then requests that URL through the normal browser session and shows its native save dialog.
+When the user clicks the button, the extension checks the current tab and its frames for a compatible URL exposed by the page resource list, PDF viewer element, or PDF.js viewer state. The PDF.js check runs in the viewer's own page context so it can read the URL already loaded by the portal. This means it does not require reloading the portal page. Chrome then requests that URL through the normal browser session, suggests a `.pdf` filename, and shows its native save dialog.
 
 ## Install locally
 
