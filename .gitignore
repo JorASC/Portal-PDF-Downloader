@@ -1,4 +1,11 @@
+# Operating system files
 .DS_Store
+
+# Test and coverage output
+coverage/
+
+# Local extension packaging output
+dist/
 *.crx
 *.pem
-dist/
+*.zip
