@@ -19,7 +19,7 @@ It is designed for documents available through the user's own signed-in Chrome s
 Open PDF in SRPPN → extension detects its portal URL → Chrome download API → native Save As dialog
 ```
 
-The extension identifies a compatible URL exposed by the page resource list or PDF viewer element. Chrome then requests that URL through the normal browser session and shows its native save dialog.
+When the user clicks the button, the extension checks the current tab and its frames for a compatible URL exposed by the page resource list or PDF viewer element. This means it does not require reloading the portal page. Chrome then requests that URL through the normal browser session and shows its native save dialog.
 
 ## Install locally
 
@@ -41,7 +41,7 @@ Only HTTPS URLs on the listed host are eligible for download. A URL from another
 
 ## Privacy and permissions
 
-The extension does not collect, store, send, or share document data or user data. Its permissions are limited to the active tab, Chrome downloads, and the SRPPN domain. Read the full [privacy policy](PRIVACY.md).
+The extension does not collect, store, send, or share document data or user data. Its permissions are limited to the active tab, temporary script execution after the user clicks the button, Chrome downloads, and the SRPPN domain. Read the full [privacy policy](PRIVACY.md).
 
 ## Development
 
@@ -51,7 +51,7 @@ This project intentionally uses plain JavaScript and no build step.
 npm test
 ```
 
-After changing extension files, open `chrome://extensions`, click the reload icon for the extension, and reload the portal page before retesting.
+After changing extension files, open `chrome://extensions` and click the reload icon for the extension. The portal tab itself does not need to be reloaded.
 
 ### Manual verification
 
@@ -66,7 +66,7 @@ After changing extension files, open `chrome://extensions`, click the reload ico
 
 ```text
 ├── src/portals/srppn.js  # SRPPN URL detection and validation rules
-├── content.js            # Reads compatible URLs from the active portal page
+├── popup.js              # Checks the active portal tab after a user click
 ├── background.js         # Validates and delegates downloads to Chrome
 ├── popup.html / popup.js # User interface
 ├── test/                 # Unit tests for portal rules

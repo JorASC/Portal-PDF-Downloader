@@ -8,7 +8,8 @@ The extension does not read passwords, extract cookies, bypass authentication, p
 
 ## Permissions
 
-- `activeTab`: lets the popup communicate with the tab the user explicitly selected.
+- `activeTab`: lets the popup access only the tab the user explicitly selected.
+- `scripting`: lets the extension check that selected tab for a compatible PDF URL only after the user clicks the download button.
 - `downloads`: opens Chrome's native save dialog after the user requests a download.
 - Host access to `srppn.chihuahua.gob.mx`: enables detection only inside the supported portal.
 

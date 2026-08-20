@@ -3,19 +3,12 @@
   "name": "Portal PDF Downloader",
   "version": "1.0.0",
   "description": "Detects and downloads the PDF currently open in a supported portal.",
-  "permissions": ["downloads", "activeTab"],
+  "permissions": ["downloads", "activeTab", "scripting"],
   "host_permissions": ["https://srppn.chihuahua.gob.mx/*"],
   "action": {
     "default_title": "Descargar el PDF abierto",
     "default_popup": "popup.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["https://srppn.chihuahua.gob.mx/*"],
-      "js": ["src/portals/srppn.js", "content.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "background": {
     "service_worker": "background.js"
   }
