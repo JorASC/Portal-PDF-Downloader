@@ -1,0 +1,9 @@
+{
+  "name": "portal-pdf-downloader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension for downloading PDFs already accessible in supported portals.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

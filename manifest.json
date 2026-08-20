@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://srppn.chihuahua.gob.mx/*"],
-      "js": ["content.js"],
+      "js": ["src/portals/srppn.js", "content.js"],
       "run_at": "document_idle"
     }
   ],

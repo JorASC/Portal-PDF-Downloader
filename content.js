@@ -1,21 +1,17 @@
 (() => {
-  const looksLikePdf = (url) => {
-    try {
-      const parsed = new URL(url, location.href);
-      return /\.pdf([?#]|$)/i.test(parsed.pathname) ||
-        /ObtenerAgregadoPorPartida/i.test(parsed.pathname + parsed.search);
-    } catch {
-      return false;
-    }
-  };
+  "use strict";
 
   const findPdfUrl = () => {
-    const resources = performance.getEntriesByType("resource");
-    const found = [...resources].reverse().find((entry) => looksLikePdf(entry.name));
-    if (found) return found.name;
+    const resourceUrls = performance.getEntriesByType("resource").map((entry) => entry.name);
+    const documentUrls = [...document.querySelectorAll("embed[src], iframe[src], object[data]")]
+      .map((element) => element.src || element.data)
+      .filter(Boolean);
 
-    const element = document.querySelector('embed[type="application/pdf"], iframe[src*="pdf"]');
-    return element?.src || null;
+    return globalThis.PortalPdfDownloader.srppn.findPdfUrl({
+      resourceUrls,
+      documentUrls,
+      baseUrl: location.href
+    });
   };
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
