@@ -8,19 +8,33 @@ const detectPdfInCurrentFrame = () => {
   const pdfFilePattern = /\.pdf$/i;
   const supportedHostname = "srppn.chihuahua.gob.mx";
   const viewerPdfUrl = globalThis.PDFViewerApplication?.url;
+
+  const isSupportedRppUrl = (value) => {
+    try {
+      const url = new URL(value, location.href);
+      return url.protocol === "https:" &&
+        url.hostname === supportedHostname &&
+        url.pathname.startsWith("/rpp/");
+    } catch {
+      return false;
+    }
+  };
+
+  if (viewerPdfUrl && isSupportedRppUrl(viewerPdfUrl)) {
+    return viewerPdfUrl;
+  }
+
   const candidates = [
     ...performance.getEntriesByType("resource").map((entry) => entry.name),
     ...[...document.querySelectorAll("embed[src], iframe[src], object[data]")]
       .map((element) => element.src || element.data)
-      .filter(Boolean),
-    viewerPdfUrl
+      .filter(Boolean)
   ].filter(Boolean);
 
   return candidates.reverse().find((value) => {
     try {
       const url = new URL(value, location.href);
-      return url.protocol === "https:" &&
-        url.hostname === supportedHostname &&
+      return isSupportedRppUrl(value) &&
         (endpointPattern.test(`${url.pathname}${url.search}`) || pdfFilePattern.test(url.pathname));
     } catch {
       return false;

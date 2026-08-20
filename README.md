@@ -8,7 +8,7 @@ It is designed for documents available through the user's own signed-in Chrome s
 
 - One-click download from the extension popup
 - Chrome's native **Save As** dialog
-- Detection of SRPPN's `ObtenerAgregadoPorPartida` endpoint and direct SRPPN PDF files
+- Download of any document URL currently open in SRPPN's PDF.js viewer
 - Strict HTTPS and portal-host validation before downloading
 - No analytics, external services, or data collection
 - Portal-specific detection logic isolated for future expansion
@@ -19,7 +19,7 @@ It is designed for documents available through the user's own signed-in Chrome s
 Open PDF in SRPPN → extension detects its portal URL → Chrome download API → native Save As dialog
 ```
 
-When the user clicks the button, the extension checks the current tab and its frames for a compatible URL exposed by the page resource list, PDF viewer element, or PDF.js viewer state. The PDF.js check runs in the viewer's own page context so it can read the URL already loaded by the portal. This means it does not require reloading the portal page. Chrome then requests that URL through the normal browser session and shows its native save dialog.
+When the user clicks the button, the extension checks the current tab and its frames for a compatible URL exposed by the page resource list, PDF viewer element, or PDF.js viewer state. The PDF.js check runs in the viewer's own page context so it can read the URL already loaded by the portal. This means it does not require reloading the portal page. Chrome then requests that URL through the normal browser session, suggests a `.pdf` filename, and shows its native save dialog.
 
 ## Install locally
 
@@ -35,9 +35,9 @@ When the user clicks the button, the extension checks the current tab and its fr
 
 | Portal | Supported URL patterns |
 | --- | --- |
-| `srppn.chihuahua.gob.mx` | `ObtenerAgregadoPorPartida` and direct `.pdf` files |
+| `srppn.chihuahua.gob.mx/rpp/` | Any HTTPS document URL currently open in the RPP PDF.js viewer |
 
-Only HTTPS URLs on the listed host are eligible for download. A URL from another domain, an insecure URL, or an unrelated portal page is rejected.
+Only HTTPS URLs under the listed RPP path are eligible for download. A URL from another domain, an insecure URL, or a page outside RPP is rejected.
 
 ## Privacy and permissions
 
